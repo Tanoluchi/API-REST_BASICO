@@ -1,9 +1,14 @@
 const express = require('express');
+const logger = require('./logger');
 const Joi = require('@hapi/joi');
 // Creamos Instancia de Express
 const app = express();
 
 app.use(express.json());
+
+app.use(logger.log);
+
+app.use(logger.authentication);
 
 const usuarios = [
 	{id: 1, nombre: 'Luciano'},
