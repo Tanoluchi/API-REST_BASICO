@@ -1,5 +1,7 @@
 const express = require('express');
-const logger = require('./logger');
+const config = require('config');
+//const logger = require('./logger');
+const morgan = require('morgan');
 const Joi = require('@hapi/joi');
 // Creamos Instancia de Express
 const app = express();
@@ -8,8 +10,18 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true})); // Convierte los valores en formato urlencoded a formato JSON.
 app.use(express.static('public'));
 
+//Configuración de entornos
+console.log('Aplicacíón: ' + config.get('nombre'));
+console.log('BD server: ' + config.get('configDB.host'));
+
+/*
 app.use(logger.log);
 app.use(logger.authentication);
+*/
+
+// Uso de middleware de tercero - Morgan
+app.use(morgan('tiny'));
+console.log('Morgan habilitado....');
 
 const usuarios = [
 	{id: 1, nombre: 'Luciano'},
