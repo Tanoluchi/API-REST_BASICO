@@ -1,3 +1,5 @@
+const debug = require('debug')('app:inicio');
+//const dbDebug = require('debug')('app:db');
 const express = require('express');
 const config = require('config');
 //const logger = require('./logger');
@@ -20,8 +22,14 @@ app.use(logger.authentication);
 */
 
 // Uso de middleware de tercero - Morgan
-app.use(morgan('tiny'));
-console.log('Morgan habilitado....');
+if(app.get('env') === 'development'){
+	app.use(morgan('tiny'));
+	//console.log('Morgan habilitado....');
+	debug('Morgan esta habilitado...');
+}
+
+// Trabajos con la base de datos
+debug('Conectando con la base de datos...');
 
 const usuarios = [
 	{id: 1, nombre: 'Luciano'},
