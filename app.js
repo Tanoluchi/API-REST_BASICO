@@ -5,6 +5,9 @@ const Joi = require('@hapi/joi');
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({extended:true})); // Convierte los valores en formato urlencoded a formato JSON.
+app.use(express.static('public'));
+
 app.use(logger.log);
 app.use(logger.authentication);
 
