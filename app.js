@@ -5,9 +5,7 @@ const Joi = require('@hapi/joi');
 const app = express();
 
 app.use(express.json());
-
 app.use(logger.log);
-
 app.use(logger.authentication);
 
 const usuarios = [
